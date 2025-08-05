@@ -1,0 +1,11 @@
+html, body {
+  min-height: 100vh;
+}
+
+.body-center {
+  @extend .d-flex;
+  @extend .justify-content-center;
+  .card-form {
+    width: 400px;
+  }
+}

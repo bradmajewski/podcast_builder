@@ -43,6 +43,8 @@ gem "thruster", require: false
 gem 'haml'
 gem 'simple_form'
 gem 'dartsass-rails'
+gem 'jquery-rails'
+gem 'bootstrap', '~> 5.3.3'
 gem 'taglib-ruby', '< 2'
 
 group :development, :test do

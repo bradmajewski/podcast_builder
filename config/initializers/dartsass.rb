@@ -2,5 +2,8 @@
 Rails.application.config.dartsass.build_options = [
   '--no-charset',
   '--embed-sources',
+  # Ignore the deprecations coming from bootstrap and theme files
   '--silence-deprecation=color-functions',
+  '--silence-deprecation=import',
+  '--silence-deprecation=global-builtin',
 ]
