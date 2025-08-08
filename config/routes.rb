@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   resources :users
+  resources :podcasts do
+    get :deleted, on: :collection
+    post :recover, on: :member
+  end
   resource :session
   resources :passwords, param: :token
 

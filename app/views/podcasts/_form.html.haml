@@ -1,0 +1,8 @@
+= f.input :title, label: "Title"
+= f.input :description, label: "Description"
+= f.input :owner, as: :select, collection: User.all, label_method: :email, value_method: :id
+= f.input :published, label: "Published", as: :boolean
+= f.input :cover_art, label: "Cover Art", as: :file
+.d-flex.align-items-center
+  .me-auto= f.button :submit, "Save", class: "btn btn-primary"
+  = link_to "Cancel", podcasts_path, class: "btn btn-secondary"

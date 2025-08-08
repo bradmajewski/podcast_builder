@@ -6,6 +6,7 @@ class CreatePodcasts < ActiveRecord::Migration[8.0]
       t.string :title,     null: false, default: ''
       t.text :description, null: false, default: ''
       t.datetime :published_at
+      t.datetime :deleted_at
       t.timestamps
     end
 
@@ -16,6 +17,7 @@ class CreatePodcasts < ActiveRecord::Migration[8.0]
       t.string :description,  null: false, default: ''
       t.json :metadata,       null: false, default: {}, comment: 'For storing ID3 tags from user uploaded files'
       t.datetime :published_at
+      t.datetime :deleted_at
       t.timestamps
       # WARNING: SQL is sqlite specific.
       # This is enforced at the database level because validations can be skipped.

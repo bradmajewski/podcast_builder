@@ -1,0 +1,18 @@
+.container
+  %h1
+    Deleted Podcasts
+    %small= link_to 'Index', podcasts_path, class: 'text-body-secondary'
+  %table.table
+    %thead
+      %tr
+        %th Title
+        %th Owner
+        %th Deleted
+        %th Actions
+    %tbody
+      - @podcasts.each do |podcast|
+        %tr
+          %td= podcast.title
+          %td= podcast.owner&.email
+          %td= dt podcast.deleted_at
+          %td= link_to 'Recover', recover_podcast_path(podcast), data: { confirm: 'Are you sure?', turbo_method: :post }, class: "btn btn-sm btn-primary"

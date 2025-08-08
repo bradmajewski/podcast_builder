@@ -14,7 +14,7 @@ class User < ApplicationRecord
   before_destroy :stop_destroy, if: -> { self.class.admins.count == 1 }
 
   def authenticate_password(...) = verified? && super
-  boolean_date_methods :verified_at
+  boolean_date_methods :verified_at, bang_method: :verify!
 
 
   private

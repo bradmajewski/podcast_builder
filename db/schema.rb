@@ -46,6 +46,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_03_184734) do
     t.string "description", default: "", null: false
     t.json "metadata", default: {}, null: false
     t.datetime "published_at"
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["owner_id"], name: "index_episodes_on_owner_id"
@@ -58,6 +59,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_03_184734) do
     t.string "title", default: "", null: false
     t.text "description", default: "", null: false
     t.datetime "published_at"
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["owner_id"], name: "index_podcasts_on_owner_id"
