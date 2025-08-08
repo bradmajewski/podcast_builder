@@ -1,4 +1,4 @@
 class ApplicationRecord < ActiveRecord::Base
+  include AttributeCastMethods
   primary_abstract_class
-  include DateTimeHelpers
 end

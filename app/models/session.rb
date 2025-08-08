@@ -1,10 +1,10 @@
 class Session < ApplicationRecord
   belongs_to :user
-  validates :user_is_verified
+  validate :user_is_verified
 
   private
 
-  def user_is_authorized
+  def user_is_verified
     errors.add(:user, "must be verified") unless user&.verified?
   end
 end

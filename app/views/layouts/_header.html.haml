@@ -1,0 +1,17 @@
+%nav.navbar.navbar-expand.bg-primary.nav-main
+  .container-fluid
+    %a.navbar-brand{href: "/"} Podcast Builder
+    %ul.navbar-nav.me-auto
+      %li.nav-item
+        %a.nav-link{href: "#"} Podcasts
+      %li.nav-item
+        %a.nav-link{href: "#"} Servers
+      %li.nav-item
+        %a.nav-link{href: users_path} Users
+    %ul.navbar-nav
+      - if authenticated?
+        %li.nav-item= link_to Current.user.email, edit_user_path(Current.user), class: "nav-link"
+        %li.nav-item= link_to t('user.logout'), session_path, data: { turbo_method: :delete }, class: "nav-link"
+      - else
+        %li.nav-item= link_to t('user.login'), class: "nav-link", href: new_session_path
+

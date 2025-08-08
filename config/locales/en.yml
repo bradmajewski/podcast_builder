@@ -28,4 +28,14 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  # Allow us to easily change between "login" and "sign in".
+  user:
+    login: "Log In"
+    register: "Register"
+    forgot_password: "Forgot Password?"
+  time:
+    formats:
+      iso: "%Y-%m-%dT%H:%M:%S%z"
+      system: "%Y-%m-%d %H:%M"
+      short: "%b %d %H:%M"
+      long: "%B %d, %Y %H:%M"

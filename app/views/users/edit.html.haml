@@ -1,0 +1,14 @@
+.body-center
+  .card.card-form
+    .card-header.text-center.bg-primary
+      %h3 Edit User
+    .card-body
+      = simple_form_for @user do |f|
+        = f.input :email, required: true
+        = f.input :password, optional: true
+        = f.input :password_confirmation, optional: true
+        = f.input :admin, as: :boolean
+        - verified_time = (f.object.verified_at || Time.current).iso8601
+        = f.input :verified, as: :boolean, label: "Verified", unchecked_value: "", checked_value: verified_time, value: f.object.verified_at.present?
+        .d-flex.align-items-center
+          .me-auto= f.button :submit, "Update", class: "btn btn-primary"

@@ -1,0 +1,13 @@
+.body-center
+  .card.card-form
+    .card-header.text-center.bg-primary
+      %h3= t("user.register")
+    .card-body
+      = simple_form_for @user do |f|
+        = f.input :email, required: true
+        = f.input :password, required: true
+        = f.input :password_confirmation, required: true
+        .d-flex.align-items-center
+          .me-auto= f.button :submit, t("user.register"), class: "btn btn-primary"
+          = link_to t("user.login"), new_session_path
+          = link_to t("user.forgot_password"), new_password_path, class: "ms-4"
