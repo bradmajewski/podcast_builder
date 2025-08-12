@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :users
   resources :podcasts do
+    resources :episodes, except: [:index, :show]
     get :deleted, on: :collection
     post :recover, on: :member
   end

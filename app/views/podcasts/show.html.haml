@@ -1,1 +1,11 @@
+%h1
+  Podcast: #{@podcast.title}
+  %small= link_to 'Edit', edit_podcast_path(@podcast), class: 'btn btn-primary'
+
 %pre= @podcast.attributes.to_yaml
+- @podcast.episodes.each do |episode|
+  %h2
+    = episode.title
+    %small= link_to 'Edit', edit_podcast_episode_path(@podcast, episode), class: 'btn btn-secondary'
+  %pre= episode.attributes.to_yaml
+= link_to 'New Episode', new_podcast_episode_path(@podcast), class: 'btn btn-primary'

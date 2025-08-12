@@ -2,9 +2,7 @@
 = f.input :description, label: "Description"
 = f.association :owner, label_method: :email, value_method: :id
 = f.input :published, label: "Published", as: :boolean
-= f.input :cover_art, label: "Cover Art", as: :file
+= f.input :audio_file, label: "Audio File", as: :file
 .d-flex.align-items-center
   .me-auto= f.button :submit, "Save", class: "btn btn-primary"
-  = link_to "Cancel", podcasts_path, class: "btn btn-secondary"
-
-%pre= @podcast.attributes.to_yaml
+  = link_to "Cancel", podcast_path(@podcast), class: "btn btn-secondary"

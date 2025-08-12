@@ -3,7 +3,7 @@ class Episode < ApplicationRecord
   # Not required because podcast may be created by a background process
   belongs_to :owner, class_name: "User", optional: true
   belongs_to :podcast
-
+  has_one_attached :audio_file
 
   # Also enforced by a sqlite-specific check constraint on the table
   validate :metadata_must_be_hash

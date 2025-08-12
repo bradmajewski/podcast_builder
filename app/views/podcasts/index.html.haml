@@ -12,7 +12,7 @@
     %tbody
       - @podcasts.each do |podcast|
         %tr
-          %td= podcast.title
+          %td= link_to podcast.title, podcast_path(podcast)
           %td= podcast.owner&.email
           %td= dt podcast.published_at
           %td

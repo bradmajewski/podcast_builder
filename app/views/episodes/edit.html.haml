@@ -1,7 +1,7 @@
 .body-center
   .card.card-form
     .card-header.text-center.bg-primary
-      %h3= @podcast.title
+      %h3 #{@podcast.title} / #{@episode.title}
     .card-body
-      = simple_form_for @podcast do |f|
+      = simple_form_for [@podcast, @episode] do |f|
         = render "form", f: f

@@ -12,7 +12,7 @@ class PodcastsController < ApplicationController
   end
 
   def new
-    @podcast = Podcast.new
+    @podcast = Podcast.new(owner: Current.user)
   end
 
   def create
