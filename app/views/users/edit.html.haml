@@ -8,7 +8,6 @@
         = f.input :password, optional: true
         = f.input :password_confirmation, optional: true
         = f.input :admin, as: :boolean
-        - verified_time = (f.object.verified_at || Time.current).iso8601
         = f.input :verified, as: :boolean
         .d-flex.align-items-center
           .me-auto= f.button :submit, "Update", class: "btn btn-primary"

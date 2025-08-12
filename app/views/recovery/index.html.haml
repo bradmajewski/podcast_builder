@@ -1,0 +1,67 @@
+.container
+  %h1 Deleted Podcasts
+  %table.table
+    %thead
+      %tr
+        %th Title
+        %th Owner
+        %th Deleted
+        %th Actions
+    %tbody
+      - @podcasts.each do |podcast|
+        %tr
+          %td= podcast.title
+          %td= podcast.owner&.name_for_ui || '–'
+          %td= dt podcast.deleted_at
+          %td= link_to 'Recover', recover_path(podcast), data: { turbo_confirm: 'Are you sure?', turbo_method: :post }, class: "btn btn-sm btn-primary"
+  %h1 Deleted Episodes
+  %table.table
+    %thead
+      %tr
+        %th Title
+        %th Podcast
+        %th Owner
+        %th Deleted
+        %th Actions
+    %tbody
+      - @episodes.each do |episode|
+        %tr
+          %td= episode.title
+          %td= link_to episode.podcast&.title, episode.podcast
+          %td= episode.owner&.name_for_ui || '–'
+          %td= dt episode.deleted_at
+          %td= link_to 'Recover', recover_path(episode), data: { turbo_confirm: 'Are you sure?', turbo_method: :post }, class: "btn btn-sm btn-primary"
+  %h1 Deleted Servers
+  %table.table
+    %thead
+      %tr
+        %th Name
+        %th Owner
+        %th Host
+        %th Deleted
+        %th Actions
+    %tbody
+      - @servers.each do |server|
+        %tr
+          %td= server.name.presence || '–'
+          %td= server.host_with_port
+          %td= server.owner&.name_for_ui || '–'
+          %td= dt server.deleted_at
+          %td= link_to 'Recover', recover_path(server), data: { turbo_confirm: 'Are you sure?', turbo_method: :post }, class: "btn btn-sm btn-primary"
+  %h1 Deleted Feeds
+  %table.table
+    %thead
+      %tr
+        %th Podcast
+        %th URL
+        %th Owner
+        %th Deleted
+        %th Actions
+    %tbody
+      - @feeds.each do |feed|
+        %tr
+          %td= link_to feed.podcast&.title, feed.podcast
+          %td= feed.url
+          %td= feed.server.owner&.name_for_ui || '–'
+          %td= dt feed.deleted_at
+          %td= link_to 'Recover', recover_path(feed), data: { turbo_confirm: 'Are you sure?', turbo_method: :post }, class: "btn btn-sm btn-primary"

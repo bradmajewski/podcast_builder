@@ -1,7 +1,6 @@
 .container
   %h1
     Podcasts
-    %small= link_to 'Deleted', deleted_podcasts_path, class: 'text-body-secondary'
   %table.table
     %thead
       %tr
@@ -13,10 +12,9 @@
       - @podcasts.each do |podcast|
         %tr
           %td= link_to podcast.title, podcast_path(podcast)
-          %td= podcast.owner&.email
-          %td= dt podcast.published_at
+          %td= podcast.owner&.name_for_ui || '–'
+          %td= dt(podcast.published_at) || '–'
           %td
-            = link_to 'Show', podcast_path(podcast), class: "btn btn-sm btn-primary"
-            = link_to 'Edit', edit_podcast_path(podcast), class: "btn btn-sm btn-secondary"
-            = link_to 'Delete', podcast_path(podcast), data: { confirm: 'Are you sure?', turbo_method: :delete }, class: "btn btn-sm btn-danger"
+            = link_to 'Edit', edit_podcast_path(podcast), class: "btn btn-sm btn-primary"
+            = link_to 'Delete', podcast_path(podcast), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: "btn btn-sm btn-danger"
   = link_to 'New Podcast', new_podcast_path, class: "btn btn-primary mt-3"

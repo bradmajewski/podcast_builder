@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :sessions, dependent: :destroy
   has_many :podcasts, foreign_key: :owner_id, inverse_of: :owner
   has_many :episodes, foreign_key: :owner_id, inverse_of: :owner
+  has_many :servers, foreign_key: :owner_id, inverse_of: :owner
 
   scope :admins, -> { where(admin: true) }
 
@@ -16,6 +17,9 @@ class User < ApplicationRecord
   def authenticate_password(...) = verified? && super
   boolean_date_methods :verified_at, bang_method: :verify!
 
+  def name_for_ui
+    email
+  end
 
   private
   def promote_and_verify

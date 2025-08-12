@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_03_184734) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_12_152155) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -54,6 +54,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_03_184734) do
     t.check_constraint "json_type(metadata) = 'object'", name: "chk_metadata_is_object"
   end
 
+  create_table "feeds", force: :cascade do |t|
+    t.integer "server_id", null: false
+    t.integer "podcast_id", null: false
+    t.string "url", null: false
+    t.string "path", null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["podcast_id"], name: "index_feeds_on_podcast_id"
+    t.index ["server_id"], name: "index_feeds_on_server_id"
+  end
+
   create_table "podcasts", force: :cascade do |t|
     t.integer "owner_id"
     t.string "title", default: "", null: false
@@ -63,6 +75,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_03_184734) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["owner_id"], name: "index_podcasts_on_owner_id"
+  end
+
+  create_table "servers", force: :cascade do |t|
+    t.integer "owner_id"
+    t.string "name"
+    t.string "host", null: false
+    t.integer "port", default: 22, null: false
+    t.string "user", null: false
+    t.text "key", null: false
+    t.datetime "last_login_at"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_servers_on_owner_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -86,8 +112,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_03_184734) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "episodes", "podcasts"
-  add_foreign_key "episodes", "users", column: "owner_id"
-  add_foreign_key "podcasts", "users", column: "owner_id"
-  add_foreign_key "sessions", "users"
+  add_foreign_key "episodes", "podcasts", on_delete: :cascade
+  add_foreign_key "episodes", "users", column: "owner_id", on_delete: :nullify
+  add_foreign_key "feeds", "podcasts", on_delete: :restrict
+  add_foreign_key "feeds", "servers", on_delete: :restrict
+  add_foreign_key "podcasts", "users", column: "owner_id", on_delete: :nullify
+  add_foreign_key "servers", "users", column: "owner_id", on_delete: :nullify
+  add_foreign_key "sessions", "users", on_delete: :cascade
 end

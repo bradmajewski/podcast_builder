@@ -1,0 +1,23 @@
+.container
+  %h1
+    Feeds
+  %table.table
+    %thead
+      %tr
+        %th Podcast
+        %th URL
+        %th Owner
+        %th Actions
+    %tbody
+      - @feeds.each do |feed|
+        %tr
+          %td= link_to feed.podcast&.title, feed.podcast
+          %td
+            = feed.url
+            %br/
+            = feed.ssh_url
+          %td= feed.server.owner&.name_for_ui || '–'
+          %td
+            = link_to 'Edit', edit_feed_path(feed), class: "btn btn-sm btn-secondary"
+            = link_to 'Delete', feed_path(feed), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: "btn btn-sm btn-danger"
+  = link_to 'New Feed', new_feed_path, class: "btn btn-primary mt-3"

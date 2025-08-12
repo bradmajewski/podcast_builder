@@ -5,12 +5,16 @@
       %li.nav-item
         %a.nav-link{href: podcasts_path} Podcasts
       %li.nav-item
-        %a.nav-link{href: "#"} Servers
+        %a.nav-link{href: servers_path} Servers
+      %li.nav-item
+        %a.nav-link{href: feeds_path} Feeds
       %li.nav-item
         %a.nav-link{href: users_path} Users
+      %li.nav-item
+        %a.nav-link{href: recovery_path} Deleted
     %ul.navbar-nav
       - if authenticated?
-        %li.nav-item= link_to Current.user.email, edit_user_path(Current.user), class: "nav-link"
+        %li.nav-item= link_to Current.user.name_for_ui, edit_user_path(Current.user), class: "nav-link"
         %li.nav-item= link_to t('user.logout'), session_path, data: { turbo_method: :delete }, class: "nav-link"
       - else
         %li.nav-item= link_to t('user.login'), class: "nav-link", href: new_session_path

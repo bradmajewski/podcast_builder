@@ -1,0 +1,21 @@
+.container
+  %h1 Servers
+  %table.table
+    %thead
+      %tr
+        %th Name
+        %th Server
+        %th Owner
+        %th Last Login
+        %th Actions
+    %tbody
+      - @servers.each do |server|
+        %tr
+          %td= server.name.presence || '–'
+          %td= server.ssh_url
+          %td= server.owner&.name_for_ui || '–'
+          %td= dt(server.last_login_at) || "–"
+          %td
+            = link_to 'Edit', edit_server_path(server), class: "btn btn-sm btn-primary"
+            = link_to 'Delete', server_path(server), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: "btn btn-sm btn-danger"
+  = link_to 'New Server', new_server_path, class: "btn btn-primary mt-3"

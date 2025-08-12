@@ -4,10 +4,6 @@ class PodcastsController < ApplicationController
     @podcasts = Podcast.all
   end
 
-  def deleted
-    @podcasts = Podcast.only_deleted
-  end
-
   def show
   end
 
@@ -35,14 +31,6 @@ class PodcastsController < ApplicationController
     end
   end
 
-  def recover
-    @podcast = Podcast.with_deleted.find(params[:id])
-    if @podcast.recover
-      redirect_to podcasts_path, notice: 'Podcast was successfully recovered.'
-    else
-      redirect_to deleted_podcasts_path, alert: 'Failed to recover podcast.'
-    end
-  end
   def destroy
     @podcast.destroy
     redirect_to podcasts_path, notice: 'Podcast was successfully destroyed.'

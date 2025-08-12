@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
+  resources :servers, except: [:show]
+  resources :feeds, except: [:show]
   resources :users
   resources :podcasts do
     resources :episodes, except: [:index, :show]
-    get :deleted, on: :collection
-    post :recover, on: :member
   end
+  get 'recover', to: 'recovery#index', as: :recovery
+  post 'recover/:model/:id', to: 'recovery#recover', as: :recovery_recover
   resource :session
   resources :passwords, param: :token
 

@@ -1,0 +1,7 @@
+.body-center
+  .card.card-form
+    .card-header.text-center.bg-primary
+      %h3 Edit Feed
+    .card-body
+      = simple_form_for @feed do |f|
+        = render "form", f: f
