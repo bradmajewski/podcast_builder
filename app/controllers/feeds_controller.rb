@@ -1,6 +1,6 @@
 class FeedsController < ApplicationController
-  layout 'card', only: %i[new create edit update]
-  before_action :find_feed, only: %i[ edit update destroy ]
+  layout 'card', only: %i[ new create edit update]
+  before_action :find_feed, only: %i[ show edit update destroy ]
   before_action :load_servers_and_podcasts, only: %i[ new create edit update ]
 
   def index
@@ -8,7 +8,7 @@ class FeedsController < ApplicationController
   end
 
   def new
-    @feed = Feed.new
+    @feed = Feed.new(server_id: params[:server_id], podcast_id: params[:podcast_id])
   end
 
   def create
@@ -18,6 +18,9 @@ class FeedsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def show
   end
 
   def edit

@@ -1,13 +1,51 @@
-%h1
-  Podcast: #{@podcast.title}
-  %small= link_to 'Edit', edit_podcast_path(@podcast, return_to: request.fullpath), class: 'btn btn-primary'
+.card
+  .card-header.bg-primary
+    .float-end= link_to 'Edit Podcast', edit_podcast_path(@podcast, return_to: request.fullpath), class: 'btn btn-sm btn-secondary'
+    %h3.card-title Podcast: #{@podcast.title}
+    - if @podcast.description.present?
+      .card-subtitle
+        = simple_format @podcast.description
+  %table.table.table-sm.card-body
+    %tbody
+      %tr
+        %th Created At:
+        %td= dt @podcast.created_at, format: :long
+      %tr
+        %th Updated At:
+        %td= dt @podcast.updated_at, format: :long
+      %tr
+        %th Published At:
+        %td= dt(@podcast.published_at, format: :long) || '–'
+      %tr
+        %th Feeds:
+        %td
+          - if @podcast.feeds.any?
+            %ul.list-unstyled
+              - @podcast.feeds.each do |feed|
+                %li= link_to feed.url, feed
+          - else
+            = link_to 'Add Feed', new_feed_path(podcast_id: @podcast.id, return_to: request.fullpath), class: 'btn btn-primary btn-sm'
+  .card-footer
+    = link_to 'New Episode', new_podcast_episode_path(@podcast), class: 'btn btn-primary ms-4'
 
-%pre= @podcast.attributes.to_yaml
 - @podcast.episodes.each do |episode|
-  %h2
-    = episode.title
-    %small
-      = link_to 'Edit', edit_podcast_episode_path(@podcast, episode), class: 'btn btn-secondary'
-      = link_to 'Delete', podcast_episode_path(@podcast, episode), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: 'btn btn-danger'
-  %pre= episode.attributes.to_yaml
-= link_to 'New Episode', new_podcast_episode_path(@podcast), class: 'btn btn-primary'
+  .card.mt-5
+    .card-header.bg-info
+      .float-end
+        = link_to 'Edit', edit_podcast_episode_path(@podcast, episode), class: 'btn btn-secondary btn-sm'
+        = link_to 'Delete', podcast_episode_path(@podcast, episode), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: 'btn btn-danger btn-sm'
+      %h2= episode.title
+      = simple_format episode.description
+    %table.table.table-sm.card-body
+      %tbody
+        %tr
+          %th Created At:
+          %td= dt(episode.created_at, format: :long)
+        %tr
+          %th Updated At:
+          %td= dt(episode.updated_at, format: :long)
+        %tr
+          %th Published At:
+          %td= dt(episode.published_at, format: :long) || '–'
+    .card-footer
+      %pre= episode.metadata.to_yaml

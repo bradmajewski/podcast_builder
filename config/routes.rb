@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :servers, except: [:show]
-  resources :feeds, except: [:show]
+  resources :feeds
   resources :users
   resources :podcasts do
     resources :episodes, except: [:index, :show]

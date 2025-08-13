@@ -43,7 +43,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_12_152155) do
     t.integer "owner_id"
     t.integer "podcast_id", null: false
     t.string "title", default: "", null: false
-    t.string "description", default: "", null: false
+    t.text "description", default: "", null: false
     t.json "metadata", default: {}, null: false
     t.datetime "published_at"
     t.datetime "deleted_at"
@@ -59,6 +59,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_12_152155) do
     t.integer "podcast_id", null: false
     t.string "url", null: false
     t.string "path", null: false
+    t.datetime "last_upload_at"
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

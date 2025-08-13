@@ -1,5 +1,4 @@
 # Cleanup
-- Design a podcast details page.
 - Add unit tests for all foreign key dependencies
 - Add controller tests for all actions that render views to catch exceptions.
 

@@ -1,0 +1,27 @@
+.body-center
+  .card
+    .card-header.bg-primary
+      %h3.card-title Feed
+      .card-subtitle= link_to @feed.url, @feed.url, target: '_blank', rel: 'noopener'
+    .list-group.list-group-flush
+      .list-group-item
+        %h4= link_to @feed.podcast.title, @feed.podcast
+        - if @feed.podcast.description.present?
+          .card-subtitle
+            = simple_format @feed.podcast.description
+      .list-group-item
+        %h4= @feed.server.name_for_ui
+        .card-subtitle= @feed.path
+    %table.table.table-sm.card-body
+      %tbody
+        %tr
+          %th Last Upload At:
+          %td= @feed.last_upload_at ? dt(@feed.last_upload_at) : "–"
+        %tr
+          %th Created At:
+          %td= @feed.created_at.strftime("%B %d, %Y")
+        %tr
+          %th Updated At:
+          %td= @feed.updated_at.strftime("%B %d, %Y")
+    .card-footer
+      = link_to 'Edit Feed', edit_feed_path(@feed, return_to: request.fullpath), class: 'btn btn-primary'

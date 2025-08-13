@@ -20,8 +20,11 @@
   box-shadow: 3px 3px 0 0 var(--#{$prefix}border-color);
 }
 
-.table {
+.table:not(.table-borderless, .card-body) {
   border: 2px solid $black;
+}
+.table.card-body {
+  margin: 0;
 }
 
 // Navbar

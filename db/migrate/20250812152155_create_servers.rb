@@ -17,6 +17,7 @@ class CreateServers < ActiveRecord::Migration[8.0]
       t.references :podcast, null: false, foreign_key: { on_delete: :restrict }
       t.string     :url,     null: false
       t.string     :path,    null: false
+      t.datetime   :last_upload_at
       t.datetime   :deleted_at
       t.timestamps
     end

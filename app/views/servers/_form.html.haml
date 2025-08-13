@@ -13,4 +13,4 @@
   = f.button :submit, "Save", class: "card-btn-save"
   = link_to "Cancel", return_to_path(servers_path), class: "card-btn-cancel"
   - unless f.object.new_record?
-    = link_to "Delete", server_path(f.object, return_to: request.fullpath), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: "card-btn-delete"
+    = link_to "Delete", f.object, data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: "card-btn-delete"
