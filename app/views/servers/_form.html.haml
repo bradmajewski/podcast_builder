@@ -1,13 +1,16 @@
-= f.input :name
-= f.association :owner, label_method: :name_for_ui
+.card-body
+  = f.input :name
+  = f.association :owner, label_method: :name_for_ui
 
-%fieldset
-  %legend SSH Connection
-  = f.input :host, label: "Host", hint: 'Domain name or IP address', input_html: { autocomplete: "off", autocorrect: "off" }
-  = f.input :port, label: "Port"
-  = f.input :user, label: "User", hint: 'Valid Linux username [a-z_][a-z0-9_-]*[$]', input_html: { autocomplete: "off", autocorrect: "off" }
-  = f.input :key, label: "Public Key", as: :text, hint: 'Do not use private key.', input_html: { autocomplete: "off", autocorrect: "off" }
+  %fieldset
+    %legend SSH Connection
+    = f.input :host, label: "Host", hint: 'Domain name or IP address', input_html: { autocomplete: "off", autocorrect: "off" }
+    = f.input :port, label: "Port"
+    = f.input :user, label: "User", hint: 'Valid Linux username [a-z_][a-z0-9_-]*[$]', input_html: { autocomplete: "off", autocorrect: "off" }
+    = f.input :key, label: "Public Key", as: :text, hint: 'Do not use private key.', input_html: { autocomplete: "off", autocorrect: "off" }
 
-.d-flex.align-items-center
-  .me-auto= f.button :submit, "Save", class: "btn btn-primary"
-  = link_to "Cancel", servers_path, class: "btn btn-secondary"
+.card-footer
+  = f.button :submit, "Save", class: "card-btn-save"
+  = link_to "Cancel", return_to_path(servers_path), class: "card-btn-cancel"
+  - unless f.object.new_record?
+    = link_to "Delete", server_path(f.object, return_to: request.fullpath), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: "card-btn-delete"

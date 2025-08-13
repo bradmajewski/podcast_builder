@@ -1,6 +1,6 @@
 %h1
   Podcast: #{@podcast.title}
-  %small= link_to 'Edit', edit_podcast_path(@podcast), class: 'btn btn-primary'
+  %small= link_to 'Edit', edit_podcast_path(@podcast, return_to: request.fullpath), class: 'btn btn-primary'
 
 %pre= @podcast.attributes.to_yaml
 - @podcast.episodes.each do |episode|

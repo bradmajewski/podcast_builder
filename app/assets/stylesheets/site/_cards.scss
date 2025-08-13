@@ -1,0 +1,47 @@
+.layout-card {
+  @extend .d-flex;
+  @extend .justify-content-center;
+  & > .card {
+    margin-top: 2rem;
+    width: 400px;
+  }
+}
+
+.card-form {
+  .card-header {
+    @extend .bg-primary;
+    @extend .h3;
+    text-align: center;
+  }
+  .card-footer {
+    @extend .card-buttons;
+  }
+}
+
+.card-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.card-btn-save {
+  @extend .btn;
+  @extend .btn-primary;
+}
+
+.card-btn-save + .card-btn-cancel {
+  margin-left: 1rem;
+}
+
+.card-btn-cancel {
+  @extend .btn;
+  @extend .btn-secondary;
+}
+
+.card-btn-cancel + .card-btn-delete {
+  margin-left: auto;
+}
+
+.card-btn-delete {
+  @extend .btn;
+  @extend .btn-danger;
+}

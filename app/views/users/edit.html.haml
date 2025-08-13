@@ -1,14 +1,14 @@
-.body-center
-  .card.card-form
-    .card-header.text-center.bg-primary
-      %h3 Edit User
-    .card-body
-      = simple_form_for @user do |f|
-        = f.input :email, required: true
-        = f.input :password, optional: true
-        = f.input :password_confirmation, optional: true
-        = f.input :admin, as: :boolean
-        = f.input :verified, as: :boolean
-        .d-flex.align-items-center
-          .me-auto= f.button :submit, "Update", class: "btn btn-primary"
-          = link_to "Cancel", users_path, class: "btn btn-secondary"
+- content_for :title, "Edit User"
+= simple_form_for @user do |f|
+  .card-body
+    = f.input :email, required: true
+    = f.input :password, optional: true
+    = f.input :password_confirmation, optional: true
+    = f.input :admin, as: :boolean
+    = f.input :verified, as: :boolean
+
+  .card-footer
+    = f.button :submit, "Update", class: "card-btn-save"
+    = link_to "Cancel", users_path, class: "card-btn-cancel"
+    - unless @user.new_record?
+      = link_to "Delete", user_path(@user), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: "card-btn-delete"

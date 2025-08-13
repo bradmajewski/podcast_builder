@@ -1,0 +1,10 @@
+- content_for :title, "Reset Password"
+= form_tag passwords_path, class: "simple_form" do
+  .card-body
+    .mb-3.email.required
+      = label_tag :email, "Email Address", class: "form-label required"
+      = email_field_tag :email, nil, required: true, autofocus: true, class: "form-control required"
+
+  .card-footer
+    = submit_tag "Email Instructions", class: "btn btn-primary"
+    = link_to "Back to #{t("user.login")}", new_session_path, class: "ms-auto"

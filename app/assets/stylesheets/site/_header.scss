@@ -2,3 +2,8 @@
   border-width: 0 0 2px 0;
   margin-bottom: 1em;
 }
+
+.flash-messages {
+  @extend .container;
+  margin: 1rem;
+}

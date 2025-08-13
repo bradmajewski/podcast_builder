@@ -3,5 +3,5 @@
   = render "layouts/head"
   %body
     = render "layouts/header"
-    = render "layouts/flash"
-    = yield
+    = render "layouts/flash" if flash.any?
+    %main.layout-application= yield

@@ -1,12 +1,9 @@
-.body-center
-  .card.card-form
-    .card-header.text-center.bg-primary
-      %h3= t("user.login")
-    .card-body
-      = simple_form_for :session, url: session_path do |f|
-        = f.input :email, required: true
-        = f.input :password, required: true
-        .d-flex.align-items-center
-          .me-auto= f.button :submit, t("user.login"), class: "btn btn-primary"
-          = link_to t("user.register"), new_user_path
-          = link_to t("user.forgot_password"), new_password_path, class: "ms-4"
+- content_for :title, t("user.login")
+= simple_form_for :session, url: session_path do |f|
+  .card-body
+    = f.input :email, required: true
+    = f.input :password, required: true
+  .card-footer
+    = f.button :submit, t("user.login"), class: "btn btn-primary"
+    = link_to t("user.register"), new_user_path, class: "ms-auto"
+    = link_to t("user.forgot_password"), new_password_path, class: "ms-4"

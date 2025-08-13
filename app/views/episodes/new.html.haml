@@ -1,7 +1,3 @@
-.body-center
-  .card.card-form
-    .card-header.text-center.bg-primary
-      %h3 #{@podcast.title} / New Episode
-    .card-body
-      = simple_form_for [@podcast, @episode] do |f|
-        = render "form", f: f
+- content_for :title, "#{@podcast.title} / New Episode"
+= simple_form_for [@podcast, @episode] do |f|
+  = render "form", f: f

@@ -1,4 +1,5 @@
 class EpisodesController < ApplicationController
+  layout 'card', only: %i[new create edit update]
   before_action :find_podcast
   before_action :find_episode, only: %i[ edit update destroy ]
 

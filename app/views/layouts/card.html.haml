@@ -1,0 +1,11 @@
+!!! 5
+%html
+  = render "layouts/head"
+  %body
+    = render "layouts/header"
+    = render "layouts/flash" if flash.any?
+    %main.layout-card
+      .card.card-form
+        - if content_for?(:title)
+          .card-header= yield :title
+        = yield

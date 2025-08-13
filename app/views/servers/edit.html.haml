@@ -10,12 +10,7 @@
     time:          :horizontal_multi_select,
     select:        :horizontal_select
   }
-.body-center
-  .card.card-form
-    .card-header.text-center.bg-primary
-      %h3
-        Edit Server
-        = @server.name_for_ui
-    .card-body
-      = simple_form_for @server, wrapper: :horizontal_form, wrapper_mappings: wrapper_mappings do |f|
-        = render "form", f: f
+- content_for :title, @server.name_for_ui
+= simple_form_for @server, wrapper: :horizontal_form, wrapper_mappings: wrapper_mappings do |f|
+  = return_to_tag
+  = render "form", f: f

@@ -1,4 +1,5 @@
 class PodcastsController < ApplicationController
+  layout 'card', only: %i[new create edit update]
   before_action :find_podcast, only: %i[ show edit update destroy ]
   def index
     @podcasts = Podcast.all
@@ -14,7 +15,7 @@ class PodcastsController < ApplicationController
   def create
     @podcast = Podcast.new(podcast_params)
     if @podcast.save
-      redirect_to @podcast, notice: 'Podcast was successfully created.'
+      redirect_return_to @podcast, notice: 'Podcast was successfully created.'
     else
       render :new
     end
@@ -25,7 +26,7 @@ class PodcastsController < ApplicationController
 
   def update
     if @podcast.update(podcast_params)
-      redirect_to @podcast, notice: 'Podcast was successfully updated.'
+      redirect_return_to @podcast, notice: 'Podcast was successfully updated.'
     else
       render :edit
     end
@@ -34,6 +35,8 @@ class PodcastsController < ApplicationController
   def destroy
     @podcast.destroy
     redirect_to podcasts_path, notice: 'Podcast was successfully destroyed.'
+  rescue ActiveRecord::DeleteRestrictionError
+    redirect_return_to podcasts_path, alert: "Cannot delete podcast with feeds."
   end
 
   private

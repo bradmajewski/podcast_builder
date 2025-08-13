@@ -1,7 +1,4 @@
-.body-center
-  .card.card-form
-    .card-header.text-center.bg-primary
-      %h3= @podcast.title
-    .card-body
-      = simple_form_for @podcast do |f|
-        = render "form", f: f
+- content_for :title, @podcast.title
+= simple_form_for @podcast do |f|
+  = return_to_tag
+  = render "form", f: f

@@ -1,4 +1,5 @@
 class ServersController < ApplicationController
+  layout 'card', only: %i[new create edit update]
   before_action :find_server, only: %i[ edit update destroy ]
 
   def index
@@ -12,7 +13,7 @@ class ServersController < ApplicationController
   def create
     @server = Server.new(server_params)
     if @server.save
-      redirect_to servers_path, notice: 'Server was successfully created.'
+      redirect_return_to servers_path, notice: 'Server was successfully created.'
     else
       flash.now[:alert] = "Unable to create server."
       render :new, status: :unprocessable_entity
@@ -24,7 +25,7 @@ class ServersController < ApplicationController
 
   def update
     if @server.update(server_params)
-      redirect_to servers_path, notice: "Server updated."
+      redirect_return_to servers_path, notice: "Server updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -34,7 +35,7 @@ class ServersController < ApplicationController
     @server.destroy
     redirect_to servers_path, notice: 'Server destroyed.'
   rescue ActiveRecord::DeleteRestrictionError
-    redirect_to servers_path, alert: "Cannot delete server with associated feeds."
+    redirect_return_to servers_path, alert: "Cannot delete server with feeds."
   end
 
   private

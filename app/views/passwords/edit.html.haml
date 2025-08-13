@@ -1,0 +1,8 @@
+- content_for :title, "New Password"
+= simple_form_for @user, url: password_path(params[:token]) do |f|
+  .card-body
+    = f.input :password, required: true, label: "New Password"
+    = f.input :password_confirmation, required: true, label: "Confirm Password"
+  .card-footer
+    = f.button :submit, "Update Password", class: "card-btn-save"
+    = link_to "Back to #{t("user.login")}", new_session_path, class: "ms-auto"

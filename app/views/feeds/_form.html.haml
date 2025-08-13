@@ -1,8 +1,11 @@
-= f.association :server, label_method: :name_for_ui
-= f.association :podcast, label_method: :title
-= f.input :url, label: "Feed URL", hint: 'URL field in feed.rss – /rss/channel/link', input_html: { autocomplete: "off", autocorrect: "off" }
-= f.input :path, label: "Server Path", hint: 'Recommend absolute path, e.g. /srv/podcasts/:title/', input_html: { autocomplete: "off", autocorrect: "off" }
+.card-body
+  = f.association :server, label_method: :name_for_ui
+  = f.association :podcast, label_method: :title
+  = f.input :url, label: "Feed URL", hint: 'URL field in feed.rss – /rss/channel/link', input_html: { autocomplete: "off", autocorrect: "off" }
+  = f.input :path, label: "Server Path", hint: 'Recommend absolute path, e.g. /srv/podcasts/:title/', input_html: { autocomplete: "off", autocorrect: "off" }
 
-.d-flex.align-items-center
-  .me-auto= f.button :submit, "Save", class: "btn btn-primary"
-  = link_to "Cancel", feeds_path, class: "btn btn-secondary"
+.card-footer
+  = f.button :submit, "Save", class: "card-btn-save"
+  = link_to "Cancel", feeds_path, class: "card-btn-cancel"
+  - unless f.object.new_record?
+    = link_to "Delete", feeds_path, data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: "card-btn-delete"

@@ -1,4 +1,5 @@
 class FeedsController < ApplicationController
+  layout 'card', only: %i[new create edit update]
   before_action :find_feed, only: %i[ edit update destroy ]
   before_action :load_servers_and_podcasts, only: %i[ new create edit update ]
 
