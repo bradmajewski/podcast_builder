@@ -1,7 +1,7 @@
 .card-body
   = return_to_tag
   = f.association :podcast, label_method: :title
-  = f.input :url, label: "Feed URL", hint: 'URL field in feed.rss – /rss/channel/link', input_html: { autocomplete: "off", autocorrect: "off" }
+  = f.input :url, label: "Feed URL", hint: 'URL field in feed.rss – https://example.com/rss/channel/link', input_html: { autocomplete: "off", autocorrect: "off" }
   = f.association :server, label_method: :name_for_ui
   = f.input :path, label: "Server Path", hint: 'Recommend absolute path, e.g. /srv/podcasts/:title/', input_html: { autocomplete: "off", autocorrect: "off" }
 

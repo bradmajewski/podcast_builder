@@ -10,6 +10,7 @@ These feeds can be created manually or from a YouTube playlist.
 - [ ] Be able to play episodes inside the application
 - [ ] Configure remote servers as deployment targets
 - [ ] Upload podcasts as static files via SFTP over SSH
+- [ ] Encryption of Server#private_key
 
 ## Not Implementing
 - Automatic updates from remote sources

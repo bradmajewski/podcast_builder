@@ -12,4 +12,14 @@ module ApplicationHelper
       hidden_field_tag :return_to, params[:return_to]
     end
   end
+
+  def hh_mm_ss(seconds)
+    return "00:00:00" if seconds.nil? || seconds <= 0
+
+    hours = seconds / 3600
+    minutes = (seconds % 3600) / 60
+    secs = seconds % 60
+
+    format("%02d:%02d:%02d", hours, minutes, secs)
+  end
 end

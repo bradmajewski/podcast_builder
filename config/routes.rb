@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :servers
+  resources :servers do
+    member do
+      post 'test', to: 'servers#test'
+    end
+  end
   resources :feeds
   resources :users
   resources :podcasts do

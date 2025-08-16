@@ -1,6 +1,6 @@
 class ServersController < ApplicationController
   layout 'card', only: %i[show new create edit update]
-  before_action :find_server, only: %i[ show edit update destroy ]
+  before_action :find_server, only: %i[ show edit update destroy test ]
 
   def index
     @servers = Server.all
@@ -43,7 +43,12 @@ class ServersController < ApplicationController
   end
 
   def test
-    @connection
+    success, error = @server.test_connection
+    if success
+      redirect_return_to servers_path, notice: "Server connection successful."
+    else
+      redirect_return_to servers_path, alert: "Server connection failed: #{error}"
+    end
   end
 
   private

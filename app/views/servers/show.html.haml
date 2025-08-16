@@ -15,4 +15,5 @@
       %td= dt @server.updated_at, format: :long
 .card-footer
   = link_to 'Edit Server', edit_server_path(@server, return_to: request.fullpath), class: 'btn btn-sm btn-secondary'
+  = link_to 'Test Connection', test_server_path(@server), data: { turbo_method: :post }, class: 'btn btn-sm btn-warning ms-4'
   = link_to 'Back to Servers', servers_path, class: 'ms-auto'

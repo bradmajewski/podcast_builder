@@ -10,3 +10,4 @@
 - Reprocess audio files into a specific format.
   - Offer to optimize for voice: 64kbps mono
 - Full cucumber coverage for all CRUD operations
+- Add a template for description on the podcast model (use regex to replace {{track_number}})

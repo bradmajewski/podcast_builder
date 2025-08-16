@@ -1,6 +1,7 @@
 .card
   .card-header.bg-primary
     .float-end= link_to 'Edit Podcast', edit_podcast_path(@podcast, return_to: request.fullpath), class: 'btn btn-sm btn-secondary'
+    .float-start.me-3= image_tag @podcast.cover_art, height: 50
     %h3.card-title Podcast: #{@podcast.title}
     - if @podcast.description.present?
       .card-subtitle
@@ -30,24 +31,35 @@
   .card-footer
     = link_to 'New Episode', new_podcast_episode_path(@podcast), class: 'btn btn-primary ms-4'
 
-- @podcast.episodes.each do |episode|
-  .card.mt-5
-    .card-header.bg-info
-      .float-end
-        = link_to 'Edit', edit_podcast_episode_path(@podcast, episode), class: 'btn btn-secondary btn-sm'
-        = link_to 'Delete', podcast_episode_path(@podcast, episode), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: 'btn btn-danger btn-sm'
-      %h2= episode.title
-      = simple_format episode.description
-    %table.table.table-sm.card-body
-      %tbody
+.card.mt-5
+  .card-header.bg-info
+    %h2 Episodes
+  %table.table.table-sm.card-body
+    %thead
+      %tr
+        %th Track #
+        %th Title
+        %th Filename
+        %th Length
+        %th Bitrate
+        %th Published At
+        %th Actions
+    %tbody
+      - @podcast.episodes.each do |episode|
         %tr
-          %th Created At:
-          %td= dt(episode.created_at, format: :long)
-        %tr
-          %th Updated At:
-          %td= dt(episode.updated_at, format: :long)
-        %tr
-          %th Published At:
-          %td= dt(episode.published_at, format: :long) || '–'
-    .card-footer
-      %pre= episode.metadata.to_yaml
+          %td= episode.track
+          %td= episode.title
+          %td= episode.audio_file.filename
+          %td= hh_mm_ss episode.length
+          %td #{episode.bitrate} kbps
+          %td= dt(episode.published_at, format: :long) || "–"
+          %td
+            = link_to 'Edit', edit_podcast_episode_path(@podcast, episode), class: 'badge-link bg-secondary'
+            = link_to 'Delete', podcast_episode_path(@podcast, episode), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: 'badge-link bg-danger ms-2'
+
+.card.mt-5
+  .card-header.text-bg-dark
+    %h2 Debug
+  %pre= @podcast.attributes.to_yaml
+  - @podcast.episodes.each do |episode|
+    %pre= episode.attributes.to_yaml

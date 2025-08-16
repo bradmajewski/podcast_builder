@@ -1,9 +1,9 @@
 .card-body
-  = f.input :title, label: "Title"
+  = f.input :title, label: "Title", hint: "Leave blank to get the title from the audio file"
   = f.input :description, label: "Description"
   = f.association :owner, label_method: :name_for_ui, value_method: :id
   = f.input :published, label: "Published", as: :boolean
-  = f.input :audio_file, label: "Audio File", as: :file
+  = f.input :audio_file, label: "Audio File", as: :file, direct_upload: true
 
 .card-footer
   = f.button :submit, "Save", class: "card-btn-save"

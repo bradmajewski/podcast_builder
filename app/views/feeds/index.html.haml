@@ -4,15 +4,15 @@
   %table.table
     %thead
       %tr
-        %th URL
         %th Podcast
+        %th URL
         %th Server
         %th Actions
     %tbody
       - @feeds.each do |feed|
         %tr
-          %td= link_to feed.url, feed
           %td= link_to feed.podcast&.title, feed.podcast
+          %td= link_to feed.url, feed
           %td= link_to feed.server.name_for_ui, feed.server
           %td
             = link_to 'Show', feed_path(feed), class: "btn btn-sm btn-info"

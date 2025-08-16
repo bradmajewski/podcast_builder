@@ -15,7 +15,8 @@ class Server < ApplicationRecord
     with: /\A[a-z_][a-z0-9_-]*[$]?\z/i,
     message: "must be a valid Linux username" }
   validates :private_key, presence: true
-  before_save :test_connection, if: :login_changed?
+  after_create :test_connection
+  after_update :test_connection, if: :login_changed?
 
   normalizes :host, with: ->(h) { h.strip.downcase }
   normalizes :user, with: ->(u) { u.strip.downcase }
