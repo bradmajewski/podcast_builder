@@ -22,7 +22,9 @@
           - if @podcast.feeds.any?
             %ul.list-unstyled
               - @podcast.feeds.each do |feed|
-                %li= link_to feed.url, feed
+                %li
+                  = link_to feed.url, feed
+                  = link_to 'edit', edit_feed_path(feed, return_to: request.fullpath), class: 'badge-link badge-primary ms-2'
           - else
             = link_to 'Add Feed', new_feed_path(podcast_id: @podcast.id, return_to: request.fullpath), class: 'btn btn-primary btn-sm'
   .card-footer

@@ -84,7 +84,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_12_152155) do
     t.string "host", null: false
     t.integer "port", default: 22, null: false
     t.string "user", null: false
-    t.text "key", null: false
+    t.text "private_key", null: false
+    t.string "host_key"
     t.datetime "last_login_at"
     t.datetime "deleted_at"
     t.datetime "created_at", null: false

@@ -1,0 +1,18 @@
+- content_for :title, @server.name_for_ui
+%table.table.table-sm.card-body
+  %tbody
+    %tr
+      %th Name:
+      %td= @server.name_for_ui
+    %tr
+      %th Last Login At:
+      %td= dt(@server.last_login_at) || "–"
+    %tr
+      %th Created At:
+      %td= dt @server.created_at, format: :long
+    %tr
+      %th Updated At:
+      %td= dt @server.updated_at, format: :long
+.card-footer
+  = link_to 'Edit Server', edit_server_path(@server, return_to: request.fullpath), class: 'btn btn-sm btn-secondary'
+  = link_to 'Back to Servers', servers_path, class: 'ms-auto'

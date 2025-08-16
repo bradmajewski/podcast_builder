@@ -16,6 +16,6 @@
           %td= user.admin? ? "Yes" : "No"
           %td= dt(user.verified_at) || "No"
           %td
-            = link_to 'Edit', edit_user_path(user), class: "btn btn-sm btn-primary"
+            = link_to 'Edit', edit_user_path(user), class: "btn btn-sm btn-secondary"
             - unless user == Current.user
               = link_to 'Delete', user_path(user), method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger"
