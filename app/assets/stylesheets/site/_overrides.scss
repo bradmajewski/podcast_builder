@@ -1,0 +1,5 @@
+
+// The validation color on checkbox labels makes it unreadable in a lot of cases
+form.simple_form div.form-check label.form-check-label {
+  color: inherit;
+}
