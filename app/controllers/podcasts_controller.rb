@@ -25,7 +25,7 @@ class PodcastsController < ApplicationController
   end
 
   def update
-    if @podcast.(podcast_params)
+    if @podcast.update(podcast_params)
       redirect_return_to @podcast, notice: 'Podcast was successfully updated.'
     else
       render :edit
