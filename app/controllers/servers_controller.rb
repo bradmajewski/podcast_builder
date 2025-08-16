@@ -1,9 +1,13 @@
 class ServersController < ApplicationController
-  layout 'card', only: %i[new create edit update]
-  before_action :find_server, only: %i[ edit update destroy ]
+  layout 'card', only: %i[show new create edit update]
+  before_action :find_server, only: %i[ show edit update destroy ]
 
   def index
     @servers = Server.all
+  end
+
+  def show
+
   end
 
   def new
@@ -38,6 +42,10 @@ class ServersController < ApplicationController
     redirect_return_to servers_path, alert: "Cannot delete server with feeds."
   end
 
+  def test
+    @connection
+  end
+
   private
   def find_server
     @server = Server.find(params[:id])
@@ -46,6 +54,6 @@ class ServersController < ApplicationController
   end
 
   def server_params
-    params.require(:server).permit(:name, :owner_id, :host, :port, :user, :key)
+    params.require(:server).permit(:name, :owner_id, :host, :port, :user, :private_key, :host_key)
   end
 end

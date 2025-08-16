@@ -450,6 +450,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   kamal
+  net-sftp
   propshaft
   puma (>= 5.0)
   rails (~> 8.0.2)

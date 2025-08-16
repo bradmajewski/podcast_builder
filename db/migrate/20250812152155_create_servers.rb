@@ -3,10 +3,11 @@ class CreateServers < ActiveRecord::Migration[8.0]
     create_table :servers do |t|
       t.references :owner, foreign_key: { to_table: :users, on_delete: :nullify }, comment: 'Not required because records may be created by a background process'
       t.string     :name
-      t.string     :host,   null: false
-      t.integer    :port,   null: false, default: 22
-      t.string     :user,   null: false
-      t.text       :key,    null: false
+      t.string     :host,        null: false
+      t.integer    :port,        null: false, default: 22
+      t.string     :user,        null: false
+      t.text       :private_key, null: false
+      t.string     :host_key
       t.datetime   :last_login_at
       t.datetime   :deleted_at
       t.timestamps

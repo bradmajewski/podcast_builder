@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :servers, except: [:show]
+  resources :servers
   resources :feeds
   resources :users
   resources :podcasts do

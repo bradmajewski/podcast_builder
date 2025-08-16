@@ -8,14 +8,16 @@ class User < ApplicationRecord
   scope :admins, -> { where(admin: true) }
 
   normalizes :email, with: ->(e) { e.strip.downcase }
-
   validates :email,    presence: true, uniqueness: true
 
   before_create :promote_and_verify, if: -> { self.class.admins.count == 0 }
   before_destroy :stop_destroy, if: -> { self.class.admins.count == 1 }
 
-  def authenticate_password(...) = verified? && super
   boolean_date_methods :verified_at, bang_method: :verify!
+
+  def authenticate_password(...)
+    verified? && super
+  end
 
   def name_for_ui
     email

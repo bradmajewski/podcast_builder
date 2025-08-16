@@ -1,5 +1,5 @@
 class FeedsController < ApplicationController
-  layout 'card', only: %i[ new create edit update]
+  layout 'card', only: %i[ show new create edit update]
   before_action :find_feed, only: %i[ show edit update destroy ]
   before_action :load_servers_and_podcasts, only: %i[ new create edit update ]
 
@@ -14,7 +14,7 @@ class FeedsController < ApplicationController
   def create
     @feed = Feed.new(feed_params)
     if @feed.save
-      redirect_to feeds_path, notice: 'Feed created.'
+      redirect_return_to feeds_path, notice: 'Feed created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -28,7 +28,7 @@ class FeedsController < ApplicationController
 
   def update
     if @feed.update(feed_params)
-      redirect_to feeds_path, notice: "Feed updated."
+      redirect_return_to feeds_path, notice: "Feed updated."
     else
       render :edit, status: :unprocessable_entity
     end

@@ -1,4 +1,5 @@
 .card-body
+  = return_to_tag
   = f.association :podcast, label_method: :title
   = f.input :url, label: "Feed URL", hint: 'URL field in feed.rss – /rss/channel/link', input_html: { autocomplete: "off", autocorrect: "off" }
   = f.association :server, label_method: :name_for_ui
@@ -6,6 +7,6 @@
 
 .card-footer
   = f.button :submit, "Save", class: "card-btn-save"
-  = link_to "Cancel", feeds_path, class: "card-btn-cancel"
+  = link_to "Cancel", return_to_path(feeds_path), class: "card-btn-cancel"
   - unless f.object.new_record?
     = link_to "Delete", f.object, data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: "card-btn-delete"

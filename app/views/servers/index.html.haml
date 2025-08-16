@@ -16,6 +16,7 @@
           %td= server.owner&.name_for_ui || '–'
           %td= dt(server.last_login_at) || "–"
           %td
-            = link_to 'Edit', edit_server_path(server), class: "btn btn-sm btn-primary"
+            = link_to 'Show', server_path(server), class: "btn btn-sm btn-info"
+            = link_to 'Edit', edit_server_path(server), class: "btn btn-sm btn-secondary"
             = link_to 'Delete', server_path(server, return_to: request.fullpath), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: "btn btn-sm btn-danger"
   = link_to 'New Server', new_server_path, class: "btn btn-primary mt-3"
