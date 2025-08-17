@@ -12,7 +12,7 @@ class EpisodesController < ApplicationController
     if @episode.save
       redirect_to podcast_path(@podcast), notice: "Episode created successfully."
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -23,7 +23,7 @@ class EpisodesController < ApplicationController
     if @episode.update(episode_params)
       redirect_to podcast_path(@podcast), notice: "Episode updated successfully."
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

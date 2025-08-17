@@ -27,7 +27,8 @@ class RecoveryController < ApplicationController
         raise "Unknown model type: #{model.name}"
       end
     else
-      redirect_to restore_path, alert: "Failed to restore #{model.name} with ID=#{record.id}."
+      redirect_to recovery_path, alert:
+        "Failed to restore #{model.name} with ID=#{record.id}. #{record.errors.full_messages.join(", ")}"
     end
   end
 

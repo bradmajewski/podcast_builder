@@ -17,7 +17,7 @@ class PodcastsController < ApplicationController
     if @podcast.save
       redirect_return_to @podcast, notice: 'Podcast was successfully created.'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -28,7 +28,7 @@ class PodcastsController < ApplicationController
     if @podcast.update(podcast_params)
       redirect_return_to @podcast, notice: 'Podcast was successfully updated.'
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
