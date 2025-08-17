@@ -45,7 +45,7 @@ gem 'simple_form'
 gem 'dartsass-rails'
 gem 'jquery-rails'
 gem 'bootstrap', '~> 5.3.3'
-gem 'taglib-ruby', '< 2'
+gem 'taglib-ruby', '< 3'
 gem "acts_as_paranoid", "~> 0.10.3"
 gem "net-sftp"
 gem 'active_storage_validations'
