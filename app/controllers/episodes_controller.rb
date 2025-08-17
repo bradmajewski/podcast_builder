@@ -43,6 +43,6 @@ class EpisodesController < ApplicationController
   end
 
   def episode_params
-    params.require(:episode).permit(:owner_id, :title, :description, :audio_file)
+    params.require(:episode).permit(:owner_id, :title, :description, :published_at, :audio_file)
   end
 end

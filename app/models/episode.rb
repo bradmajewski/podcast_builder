@@ -4,23 +4,20 @@ class Episode < ApplicationRecord
   belongs_to :owner, class_name: "User", optional: true
   belongs_to :podcast
   has_one_attached :audio_file
+
   before_create :set_title_from_metadata, if: -> { audio_file.attached? && title.blank? }
+  before_create :set_published_from_filename, if: -> { audio_file.attached? }
+
+  scope :published, -> { where.not(published_at: nil) }
 
   # Also enforced by a sqlite-specific check constraint on the table
+
   validate :metadata_must_be_hash
+  validates :audio_file, attached: true, processable_file: true
 
-  boolean_date_methods :published_at, bang_method: :publish!
-
-  # Need to read metadata here. A new attachment won't have a path and taglib
-  # requires a file on disk. Most of the gem is written in C, including
-  # initializers that accept file names.
-  def audio_file=(file)
-    self.metadata = AudioTags.new(file).attributes if file.present?
-    self.length = metadata.fetch("length_in_seconds", 0)
-    self.bitrate = metadata.fetch("bitrate", 0)
-    super
-  end
-
+  def published?  = published_at.present?
+  def filename    = "#{id}.mp3"
+  def guid        = id   # only needs to be unique inside a feed
   # Metadata can vary widely between audio files.
   def album       = metadata["album"]
   def artist      = metadata["artist"]
@@ -31,15 +28,38 @@ class Episode < ApplicationRecord
   def year        = metadata["year"]
   def bitrate     = metadata["bitrate"]
   def channels    = metadata["channels"]
-  def length      = metadata["length_in_seconds"]
   def sample_rate = metadata["sample_rate"]
 
+  # Need to read metadata here. A new attachment won't have a path and taglib
+  # requires a file on disk. Most of the gem is written in C, including
+  # initializers that accept file names.
+  def audio_file=(file)
+    self.metadata = AudioTags.new(file).attributes if file.present?
+    self.duration = metadata.fetch("length_in_seconds", 0)
+    self.bitrate = metadata.fetch("bitrate", 0)
+    super
+  end
+
   private
+
   def set_title_from_metadata
     self.title = metadata.fetch("title", "")
   end
 
+  def set_published_from_filename
+    self.published_at = Date.parse(File.basename(audio_file.filename.to_s, ".*"))
+  rescue Date::Error
+  end
+
+  def audio_file_is_mpeg
+    if audio_file.attached? && audio_file.content_type !~ %r`\Aaudio\/`
+      errors.add(:audio_file, "must be an audio file")
+    end
+  end
+
   def metadata_must_be_hash
-    errors.add(:metadata, "must be a Hash, got #{metadata.class.name}") unless metadata.is_a?(Hash)
+    unless metadata.is_a?(Hash)
+      errors.add(:metadata, "must be a Hash, got #{metadata.class.name}")
+    end
   end
 end

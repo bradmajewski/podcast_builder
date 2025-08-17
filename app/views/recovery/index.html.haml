@@ -15,11 +15,13 @@
           %td= dt podcast.deleted_at
           %td= link_to 'Recover', recover_path(podcast), data: { turbo_confirm: 'Are you sure?', turbo_method: :post }, class: "btn btn-sm btn-primary"
   %h1 Deleted Episodes
+  %p The audio file is not recoverable after deletion. It will need to be added back.
   %table.table
     %thead
       %tr
         %th Title
         %th Podcast
+        %th Audio File
         %th Owner
         %th Deleted
         %th Actions
@@ -28,9 +30,12 @@
         %tr
           %td= episode.title
           %td= link_to episode.podcast&.title, episode.podcast
+          %td= episode.audio_file.filename if episode.audio_file.attached?
           %td= episode.owner&.name_for_ui || '–'
           %td= dt episode.deleted_at
-          %td= link_to 'Recover', recover_path(episode), data: { turbo_confirm: 'Are you sure?', turbo_method: :post }, class: "btn btn-sm btn-primary"
+          %td
+            = link_to 'Recover', recover_path(episode), data: { turbo_confirm: 'Are you sure?', turbo_method: :post }, class: "badge-link bg-primary"
+
   %h1 Deleted Servers
   %table.table
     %thead
