@@ -4,7 +4,11 @@ Rails.application.routes.draw do
       post 'test', to: 'servers#test'
     end
   end
-  resources :feeds
+  resources :feeds do
+    member do
+      get 'rss', to: 'feeds#rss'
+    end
+  end
   resources :users
   resources :podcasts do
     resources :episodes, except: [:index, :show]

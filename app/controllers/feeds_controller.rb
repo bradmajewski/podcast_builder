@@ -1,6 +1,6 @@
 class FeedsController < ApplicationController
   layout 'card', only: %i[ show new create edit update]
-  before_action :find_feed, only: %i[ show edit update destroy ]
+  before_action :find_feed, only: %i[ show rss edit update destroy ]
   before_action :load_servers_and_podcasts, only: %i[ new create edit update ]
 
   def index
@@ -21,6 +21,13 @@ class FeedsController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.html
+      format.rss { render body: @feed.rss, content_type: 'application/rss+xml' }
+    end
+  end
+
+  def rss
   end
 
   def edit

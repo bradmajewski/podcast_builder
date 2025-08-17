@@ -9,6 +9,10 @@ class Feed < ApplicationRecord
   validates :url, presence: true
   validates :path, presence: true
 
+  def rss
+    FeedBuilder.new(self).rss
+  end
+
   def ssh_url
     "#{server.ssh_url}:#{path_with_trailing_slash}"
   end
