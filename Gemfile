@@ -48,6 +48,7 @@ gem 'bootstrap', '~> 5.3.3'
 gem 'taglib-ruby', '< 2'
 gem "acts_as_paranoid", "~> 0.10.3"
 gem "net-sftp"
+gem 'active_storage_validations'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

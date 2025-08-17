@@ -37,5 +37,7 @@ en:
     formats:
       iso: "%Y-%m-%dT%H:%M:%S%z"
       system: "%Y-%m-%d %H:%M"
-      short: "%b %d %H:%M"
-      long: "%B %d, %Y %H:%M"
+      short: "%b %-d %H:%M"
+      long: "%B %-d, %Y %H:%M"
+      date: "%B %-d, %Y"
+      time: "%H:%M"

@@ -2,8 +2,9 @@
   = f.input :title, label: "Title", hint: "Leave blank to get the title from the audio file"
   = f.input :description, label: "Description"
   = f.association :owner, label_method: :name_for_ui, value_method: :id
-  = f.input :published, label: "Published", as: :boolean
-  = f.input :audio_file, label: "Audio File", as: :file, direct_upload: true
+  = f.input :published_at, label: "Published", as: :date, html5: true
+  - hint = "Already uploaded: #{f.object.audio_file.filename}" if !f.object..changed? and f.object.audio_file.attached?
+  = f.input :audio_file, label: "Audio File", as: :file, hint: hint
 
 .card-footer
   = f.button :submit, "Save", class: "card-btn-save"

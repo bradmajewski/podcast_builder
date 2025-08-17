@@ -7,5 +7,7 @@ class Podcast < ApplicationRecord
   has_many :feeds, dependent: :restrict_with_exception
   has_one_attached :cover_art
 
-  boolean_date_methods :published_at, bang_method: :publish!
+  validates :cover_art, processable_file: true, allow_nil: true
+
+  def published? = published_at.present?
 end
