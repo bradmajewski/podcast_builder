@@ -4,7 +4,7 @@ Create podcast feeds that can be uploaded to a server as static files.
 These feeds can be created manually or from a YouTube playlist.
 
 ## Planned Features
-- [ ] Manual creation of feeds
+- [x] Manual creation of feeds
 - [ ] Downloading YouTube playlists
 - [ ] Importing RSS files into existing feeds
 - [ ] Be able to play episodes inside the application
