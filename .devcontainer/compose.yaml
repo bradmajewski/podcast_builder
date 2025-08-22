@@ -24,4 +24,27 @@ services:
     image: selenium/standalone-chromium
     restart: unless-stopped
 
-  
+  scpserver:
+    image: lscr.io/linuxserver/openssh-server:latest
+    container_name: openssh-server
+    hostname: openssh-server #optional
+    ports:
+    - 2222:2222
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - "PUBLIC_KEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGvSI2hKDbN9JXP7+S2/oGZswfXy1krHXwilJ/nz9Ji0 Test Key"
+      - USER_NAME=podcast_builder
+    volumes:
+    - htdocs:/config/htdocs
+
+  httpd:
+    image: httpd:2.4-alpine
+    ports:
+    - 80:80
+    volumes:
+    - htdocs:/usr/local/apache2/htdocs
+
+volumes:
+  htdocs:
