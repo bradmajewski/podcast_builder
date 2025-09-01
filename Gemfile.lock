@@ -457,7 +457,9 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   kamal
-  net-sftp
+  net-scp (= 4.1.0)
+  net-sftp (= 4.0.0)
+  net-ssh (= 7.3.0)
   propshaft
   puma (>= 5.0)
   rails (~> 8.0.2)

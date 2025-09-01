@@ -47,7 +47,10 @@ gem 'jquery-rails'
 gem 'bootstrap', '~> 5.3.3'
 gem 'taglib-ruby', '< 2'
 gem "acts_as_paranoid", "~> 0.10.3"
-gem "net-sftp"
+# Locking these due to deprecations in net-ssh and net-sftp not being well maintained.
+gem "net-ssh", "7.3.0"
+gem "net-scp", "4.1.0"
+gem "net-sftp", "4.0.0"
 gem 'active_storage_validations'
 
 group :development, :test do
