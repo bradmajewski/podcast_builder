@@ -9,7 +9,6 @@ class FeedBuilder
   end
 
   delegate :podcast, to: :feed
-  delegate :episodes, to: :podcast
 
   def url(filename=nil)
     "#{@url}/#{filename}"
@@ -40,7 +39,7 @@ class FeedBuilder
           xml.tag! 'itunes:image', href: url('cover-art.jpg')
         end
 
-        episodes.published.each do  |episode|
+        feed.episodes.each do  |episode|
           xml.item do
             # xml.author episode.author
             xml.title episode.title

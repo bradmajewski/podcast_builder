@@ -1,0 +1,7 @@
+.card-header= @episode.title
+%table.table.table-sm.card-body
+  %tbody
+    %tr
+      %th Podcast:
+      %td= link_to @podcast.title, @podcast
+.card-body=audio_tag url_for(@episode.audio_file), controls: true

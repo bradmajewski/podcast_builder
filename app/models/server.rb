@@ -44,7 +44,7 @@ class Server < ApplicationRecord
   end
 
   def sftp_session(&)
-    SFTPClient.new(self).start(&)
+    SFTP::Client.new(self).start_session(&)
   end
 
   def login_changed?
@@ -55,7 +55,7 @@ class Server < ApplicationRecord
     sftp_session {}
     login!
     [true, nil]
-  rescue SFTPClient::Error => e
+  rescue SFTP::Error => e
     [false, "Connection failed: #{e.cause&.class&.name} #{e.message}"]
   end
 end

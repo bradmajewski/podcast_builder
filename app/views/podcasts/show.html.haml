@@ -48,11 +48,12 @@
           %td= episode.track
           %td= episode.title
           %td= episode.audio_file.filename
-          %td= episode.duration&.to_clock
+          %td.text-end= episode.duration&.to_clock
           %td #{episode.bitrate} kbps
           %td= dt(episode.published_at, format: :date) || "–"
           %td
-            = link_to 'Edit', edit_podcast_episode_path(@podcast, episode), class: 'badge-link bg-secondary'
+            = link_to 'Play', podcast_episode_path(@podcast, episode), class: 'badge-link bg-info', target: '_blank', rel: 'noopener'
+            = link_to 'Edit', edit_podcast_episode_path(@podcast, episode), class: 'badge-link bg-secondary ms-2'
             = link_to 'Delete', podcast_episode_path(@podcast, episode), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: 'badge-link bg-danger ms-2'
 
 .card.mt-5

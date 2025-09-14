@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   end
   resources :users
   resources :podcasts do
-    resources :episodes, except: [:index, :show]
+    resources :episodes, except: [:index]
   end
   get 'recover', to: 'recovery#index', as: :recovery
   post 'recover/:model/:id', to: 'recovery#recover', as: :recovery_recover

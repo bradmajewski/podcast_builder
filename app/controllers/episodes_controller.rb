@@ -1,7 +1,11 @@
 class EpisodesController < ApplicationController
-  layout 'card', only: %i[new create edit update]
+  layout 'card', only: %i[show new create edit update]
   before_action :find_podcast
-  before_action :find_episode, only: %i[ edit update destroy ]
+  before_action :find_episode, only: %i[ show edit update destroy ]
+
+  def show
+
+  end
 
   def new
     @episode = @podcast.episodes.build(owner: Current.user)
