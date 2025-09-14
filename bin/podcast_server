@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+ssh -i /workspaces/podcast_builder/test/fixtures/files/id_ed25519 -p 2222 -l podcast_builder openssh-server

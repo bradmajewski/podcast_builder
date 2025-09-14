@@ -1,4 +1,4 @@
-class SFTPClient
+module SFTP
   # TODO: Implement this
   # This class needs to be overridden to use a database table. Host key
   # verification in Net::SSH uses a lot of different classes and is difficult
