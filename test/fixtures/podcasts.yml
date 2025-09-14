@@ -2,12 +2,11 @@
 
 one:
   id: 1
-  title: MyString
-  description: MyText
+  title: "The Test Podcast"
+  description: "A podcast about testing."
   published_at: 2025-08-03 18:27:34
 
-two:
+music:
   id: 2
-  title: MyString
-  description: MyText
-  published_at: 2025-08-03 18:27:34
+  title: "Thatched Villagers"
+  description: "Kevin MacLeod, CC BY 3.0, https://creativecommons.org/licenses/by/3.0/"

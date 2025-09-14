@@ -49,7 +49,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_16_192325) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "length", default: 0, null: false
     t.integer "duration", default: 0, null: false
     t.integer "bitrate", default: 0, null: false
     t.index ["owner_id"], name: "index_episodes_on_owner_id"

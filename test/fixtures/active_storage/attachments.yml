@@ -1,0 +1,10 @@
+music_one:
+  name: audio_file
+  record_type: Episode
+  record_id: 3
+  blob: music_one_blob
+music_two:
+  name: audio_file
+  record_type: Episode
+  record_id: 4
+  blob: music_two_blob

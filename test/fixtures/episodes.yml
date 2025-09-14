@@ -3,13 +3,43 @@
 one:
   id: 1
   podcast_id: 1
-  title: MyString
-  description: MyString
+  title: "Episode One: The Beginning"
+  description: The first episode of the test podcast
   published_at: 2025-08-03 18:28:09
 
 two:
   id: 2
-  podcast_id: 2
-  title: MyString
-  description: MyString
+  podcast_id: 1
+  title: "Episode Two: The End"
+  description: This podcast didn't last long.
   published_at: 2025-08-03 18:28:09
+
+music_one:
+  id: 3
+  podcast_id: 2
+  title: "Achaidh Cheide"
+  description: "Kevin MacLeod, CC BY 3.0, https://creativecommons.org/licenses/by/3.0/"
+  published_at: 2025-08-03 18:28:09
+
+music_two:
+  id: 4
+  podcast_id: 2
+  title: "Thatched Villagers"
+  description: "Kevin MacLeod, CC BY 3.0, https://creativecommons.org/licenses/by/3.0/"
+  published_at: 2025-08-03 18:28:09
+  metadata: {
+    "album": "Celtic and Folk",
+    "artist": "Kevin MacLeod",
+    "comment": " 00000000 00000210 00000858 00000000005A2B98 00000001 0051B249 00000000 00000000 00000000 00000000 00000000 00000000",
+    "genre": "World",
+    "title": "Achaidh Cheide",
+    "track": 0,
+    "year": 2007,
+    "bitrate": 320,
+    "channels": 2,
+    "length_in_milliseconds": 134060,
+    "length_in_seconds": 134,
+    "sample_rate": 44100
+    }
+  duration: 134
+  bitrate: 320
