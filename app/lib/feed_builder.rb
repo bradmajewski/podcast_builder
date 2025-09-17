@@ -14,6 +14,10 @@ class FeedBuilder
     "#{@url}/#{filename}"
   end
 
+  def index_html
+    render_to_string("feed_builder/index", feed: feed)
+  end
+
   def rss
     file = String.new # We want the string to be unfrozen
     # reference: https://help.apple.com/itc/podcasts_connect/#/itcb54353390
@@ -53,5 +57,11 @@ class FeedBuilder
       end
     end
     file
+  end
+
+  private
+
+  def render_to_string(template, **locals)
+    ApplicationController.render(template: template, layout: nil, locals: locals)
   end
 end

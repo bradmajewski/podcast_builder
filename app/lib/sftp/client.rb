@@ -1,3 +1,5 @@
+require 'shellwords'
+
 module SFTP
   # Partial abstraction for Net::SFTP::Session. Only implements operations that
   # the application needs.
@@ -43,6 +45,10 @@ module SFTP
       end
     end
 
+    def close
+      ssh&.close
+    end
+
     def start_session(&)
       Net::SFTP.start(
         server.host,
@@ -55,17 +61,12 @@ module SFTP
       )
     end
 
-    def ssh(&)
-      raise ArgumentError, "Block is required to ensure the connection gets closed." unless block_given?
-      Net::SSH.start(
-        server.host,
-        server.user,
-        port: server.port,
-        key_data: [clean_private_key(server.private_key)],
-        logger: @logger,
-        **DEFAULTS,
-        &
-      )
+    def ssh
+      @session&.session
+    end
+
+    def rm_f(path)
+      ssh.exec!("rm -f #{Shellwords.escape(path)}")
     end
 
     operation def list_files(path)
@@ -82,6 +83,18 @@ module SFTP
       'not_found'
     rescue Error.catch(FX_PERMISSION_DENIED)
       'permission_denied'
+    end
+
+    def upload(local, remote)
+      client.upload!(local, remote)
+    end
+
+    operation def read_file(path)
+      session.file.open(path, "r") do |file|
+        file.read
+      end
+    rescue Error.catch(FX_NO_SUCH_FILE)
+      nil
     end
 
     operation def write_file(path, contents)

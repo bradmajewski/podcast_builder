@@ -11,12 +11,10 @@ class Feed < ApplicationRecord
   validates :url, presence: true
   validates :path, presence: true
 
-  def rss
-    FeedBuilder.new(self).rss
-  end
+  delegate :rss, :index_html, to: :builder
 
-  def index_html
-    render_to_string("feeds/feed_index", locals: { feed: self })
+  def builder
+    @feed_builder ||= FeedBuilder.new(self)
   end
 
   def ssh_url

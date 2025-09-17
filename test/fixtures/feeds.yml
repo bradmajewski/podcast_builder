@@ -3,4 +3,4 @@ music:
   podcast_id: 2
   url: "http://example.com/music"
   server_id: 1
-  path: "test/music"
+  path: "test_feed/music"
