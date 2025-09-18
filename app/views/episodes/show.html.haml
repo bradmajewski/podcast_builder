@@ -1,7 +1,26 @@
 .card-header= @episode.title
 %table.table.table-sm.card-body
   %tbody
+    - if @episode.description.present?
+      %tr
+        %th Description
+        %td= @episode.description
     %tr
-      %th Podcast:
+      %th Podcast
       %td= link_to @podcast.title, @podcast
+    %tr
+      %th Published
+      %td= dt(@episode.published_at, format: :date) || "–"
+    %tr
+      %th Created
+      %td= dt @episode.created_at, format: :system
+    %tr
+      %th Last Updated
+      %td= dt @episode.updated_at, format: :system
+    %tr
+      %th Audio Format
+      %td
+        = @episode.audio_file.content_type
+        @ #{@episode.bitrate} kbps
+
 .card-body=audio_tag url_for(@episode.audio_file), controls: true
