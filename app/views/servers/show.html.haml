@@ -9,16 +9,19 @@
       %td= dt(@server.last_login_at) || "–"
     %tr
       %th Created At:
-      %td= dt @server.created_at, format: :long
+      %td= dt @server.created_at, format: :system
     %tr
       %th Updated At:
-      %td= dt @server.updated_at, format: :long
+      %td= dt @server.updated_at, format: :system
 .card-body
-  %h4 Feeds
-  %ul.list-unstyled
-    - @server.feeds.each do |feed|
-      %li
-        %div= link_to feed.path, feed
+  - if @server.feeds.any?
+    %strong Feeds
+    %ul.list-unstyled
+      - @server.feeds.each do |feed|
+        %li
+          %div= link_to feed.path, feed
+  - else
+    %em No feeds
 
 .card-footer
   = link_to 'Edit Server', edit_server_path(@server, return_to: request.fullpath), class: 'btn btn-sm btn-secondary'

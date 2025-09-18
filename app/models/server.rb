@@ -27,6 +27,17 @@ class Server < ApplicationRecord
     find_by(host: host, user: user)
   end
 
+  # Used to hide the private key from the ui after it has been saved.
+  def update_private_key
+    @update_private_key
+  end
+
+  def update_private_key=(key)
+    return if key&.strip.blank?
+    @update_private_key = key
+    self.private_key = key
+  end
+
   def login!
     update_column :last_login_at, Time.current
   end

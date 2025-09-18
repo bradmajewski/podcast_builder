@@ -7,10 +7,10 @@
     = f.input :host, label: "Host", hint: 'Domain name or IP address', input_html: { autocomplete: "off", autocorrect: "off" }
     = f.input :port, label: "Port"
     = f.input :user, label: "User", hint: 'Valid Linux username [a-z_][a-z0-9_-]*[$]', input_html: { autocomplete: "off", autocorrect: "off" }
-    = f.input :private_key, label: "Private Key", as: :text, hint: 'Starts with -----BEGIN ... KEY-----', input_html: { autocomplete: "off", autocorrect: "off" }
+    = f.input :update_private_key, label: "Update Private Key", as: :text, hint: 'Starts with -----BEGIN ... KEY-----', input_html: { autocomplete: "off", autocorrect: "off" }
     = f.input :host_key, label: "Host Key", hint: 'From ~/.ssh/known_hosts', input_html: { autocomplete: "off", autocorrect: "off" }
 
-.card-footer
+.card-footer.card-buttons
   = f.button :submit, "Save", class: "card-btn-save"
   = link_to "Cancel", return_to_path(servers_path), class: "card-btn-cancel"
   - unless f.object.new_record?

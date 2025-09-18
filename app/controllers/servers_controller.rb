@@ -1,5 +1,5 @@
 class ServersController < ApplicationController
-  layout 'card', only: %i[show new create edit update]
+  layout 'card', only: %i[show]
   before_action :find_server, only: %i[ show edit update destroy test ]
 
   def index
