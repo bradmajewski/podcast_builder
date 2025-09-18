@@ -1,7 +1,9 @@
 class RecoveryController < ApplicationController
   # If you add a model, you need to add a redirect in the undelete method
   SAFE_MODELS = [Podcast, Episode, Server, Feed].map(&:name).freeze
-  before_action :only_allows_safe_models, only: [:recover]
+  before_action :only_allows_safe_models, only: %i[recover]
+  layout 'card', only: %i[episode]
+
 
   def index
     @podcasts = Podcast.only_deleted
@@ -29,6 +31,20 @@ class RecoveryController < ApplicationController
     else
       redirect_to recovery_path, alert:
         "Failed to restore #{model.name} with ID=#{record.id}. #{record.errors.full_messages.join(", ")}"
+    end
+  end
+
+  def episode
+    @episode = Episode.only_deleted.find(params[:id])
+    @podcast = Podcast.with_deleted.find_by(id: @episode.podcast_id)
+    if request.post?
+      episode_params = params.require(:episode).permit(:audio_file)
+      @episode.assign_attributes(episode_params)
+      if @episode.recover
+        redirect_to podcast_path(@episode.podcast), notice: "Episode \"#{@episode.title}\" restored."
+      else
+        flash.now[:alert] = "Failed to restore Episode with ID=#{@episode.id}. #{@episode.errors.full_messages.join(", ")}"
+      end
     end
   end
 

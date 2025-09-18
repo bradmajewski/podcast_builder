@@ -20,3 +20,9 @@ main.layout-application {
 form.simple_form div.form-check label.form-check-label {
   color: inherit;
 }
+
+@include media-breakpoint-up(lg) {
+  .table-actions {
+    white-space: nowrap;
+  }
+}

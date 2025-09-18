@@ -1,6 +1,6 @@
 class FeedsController < ApplicationController
-  layout 'card', only: %i[ show new create edit update]
-  before_action :find_feed, only: %i[ show rss edit update destroy ]
+  layout 'card', only: %i[ new create edit update]
+  before_action :find_feed, except: %i[ index new create ]
   before_action :load_servers_and_podcasts, only: %i[ new create edit update ]
 
   def index
@@ -28,6 +28,13 @@ class FeedsController < ApplicationController
   end
 
   def rss
+  end
+
+  def preview_html
+  end
+
+  def show_html
+    render html: @feed.index_html
   end
 
   def edit

@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   resources :servers do
     member do
-      post 'test', to: 'servers#test'
+      post 'test'
     end
   end
   resources :feeds do
     member do
-      get 'rss', to: 'feeds#rss'
+      get 'rss'
+      get 'preview_html'
     end
   end
   resources :users
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
   end
   get 'recover', to: 'recovery#index', as: :recovery
   post 'recover/:model/:id', to: 'recovery#recover', as: :recovery_recover
+  match 'recover/fix/episode/:id', to: "recovery#episode", via: [:get, :post], as: :recovery_episode
   resource :session
   resources :passwords, param: :token
 

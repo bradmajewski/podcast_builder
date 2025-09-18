@@ -34,7 +34,10 @@
           %td= episode.owner&.name_for_ui || '–'
           %td= dt episode.deleted_at
           %td
-            = link_to 'Recover', recover_path(episode), data: { turbo_confirm: 'Are you sure?', turbo_method: :post }, class: "badge-link bg-primary"
+            - if episode.audio_file.attached?
+              = link_to 'Recover', recover_path(episode), data: { turbo_confirm: 'Are you sure?', turbo_method: :post }, class: "badge-link bg-primary"
+            - else
+              = link_to 'Fix', recovery_episode_path(episode), class: "badge-link bg-warning"
 
   %h1 Deleted Servers
   %table.table

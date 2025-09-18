@@ -11,7 +11,7 @@
     %tbody
       - @servers.each do |server|
         %tr
-          %td= server.name.presence || '–'
+          %td= link_to server.name.presence || '–', server
           %td= server.ssh_url
           %td= server.owner&.name_for_ui || '–'
           %td= dt(server.last_login_at) || "–"

@@ -1,0 +1,8 @@
+- content_for :title, "#{@podcast.title} / #{@episode.title}"
+= simple_form_for @episode, url: recovery_episode_path(@episode), method: :post do |f|
+  .card-body
+    %p When an episode is deleted the audio file is not kept.
+    = f.input :audio_file, label: "Audio File", as: :file
+  .card-footer
+    = f.button :submit, "Save", class: "card-btn-save"
+    = link_to "Cancel", recovery_path, class: "card-btn-cancel"

@@ -13,7 +13,15 @@
     %tr
       %th Updated At:
       %td= dt @server.updated_at, format: :long
+.card-body
+  %h4 Feeds
+  %ul.list-unstyled
+    - @server.feeds.each do |feed|
+      %li
+        %div= link_to feed.path, feed
+
 .card-footer
   = link_to 'Edit Server', edit_server_path(@server, return_to: request.fullpath), class: 'btn btn-sm btn-secondary'
   = link_to 'Test Connection', test_server_path(@server), data: { turbo_method: :post }, class: 'btn btn-sm btn-warning ms-4'
   = link_to 'Back to Servers', servers_path, class: 'ms-auto'
+

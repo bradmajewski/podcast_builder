@@ -47,12 +47,14 @@
         %tr{ class: (episode.published? ? '' : 'table-secondary') }
           %td= episode.track
           %td= episode.title
-          %td= episode.audio_file.filename
+          %td
+            = episode.audio_file.filename
           %td.text-end= episode.duration&.to_clock
           %td #{episode.bitrate} kbps
           %td= dt(episode.published_at, format: :date) || "–"
-          %td
+          %td.table-actions
             = link_to 'Play', podcast_episode_path(@podcast, episode), class: 'badge-link bg-info', target: '_blank', rel: 'noopener'
+            = link_to 'Download', rails_blob_path(episode.audio_file, disposition: "attachment"), class: 'badge-link bg-warning ms-2'
             = link_to 'Edit', edit_podcast_episode_path(@podcast, episode), class: 'badge-link bg-secondary ms-2'
             = link_to 'Delete', podcast_episode_path(@podcast, episode), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: 'badge-link bg-danger ms-2'
 
