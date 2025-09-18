@@ -1,5 +1,18 @@
+:ruby
+  title_hint =
+    if f.object.persisted?
+      if f.object.title.blank?
+        if f.object.meta_title.present?
+          "Suggested: #{f.object.meta_title}"
+        else
+          "Title will be updated from any new audio file's metadata."
+        end
+      end
+    else
+      "Leave blank to get the title from the audio file"
+    end
 .card-body
-  = f.input :title, label: "Title", hint: "Leave blank to get the title from the audio file"
+  = f.input :title, label: "Title", hint: title_hint
   = f.input :description, label: "Description"
   = f.association :owner, label_method: :name_for_ui, value_method: :id
   = f.input :published_at, label: "Published", as: :date, html5: true

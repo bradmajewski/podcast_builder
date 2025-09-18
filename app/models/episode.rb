@@ -17,6 +17,7 @@ class Episode < ApplicationRecord
   def file_ext    = audio_file.filename.extension
   def guid        = id   # only needs to be unique inside a feed
   # Metadata can vary widely between audio files.
+  def meta_title  = metadata["title"].presence
   def album       = metadata["album"]
   def artist      = metadata["artist"]
   def comment     = metadata["comment"]
