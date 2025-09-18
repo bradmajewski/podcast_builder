@@ -1,0 +1,5 @@
+.card.mt-5
+  .card-header.text-bg-dark
+    .float-end= link_to 'Back to Feed', feed_path(@feed), class: 'btn btn-sm btn-secondary'
+    %h2 Push Log
+  %pre= @uploader.client.log.string

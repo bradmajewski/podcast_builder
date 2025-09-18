@@ -37,6 +37,12 @@ class FeedsController < ApplicationController
     render html: @feed.index_html
   end
 
+  def push
+    @uploader = SFTP::Upload.new(@feed)
+    @uploader.upload
+    render :push
+  end
+
   def edit
   end
 

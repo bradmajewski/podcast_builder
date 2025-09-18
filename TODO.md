@@ -3,7 +3,6 @@
 
 # Next Step
 - Load a podcast into the application
-- Add cover art and audio files.
 
 # Ideas
 - Consider adding episode numbers and acts_as_list. (This is track in the metadata)

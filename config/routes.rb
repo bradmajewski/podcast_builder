@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     member do
       get 'rss'
       get 'preview_html'
+      post 'push'
     end
   end
   resources :users

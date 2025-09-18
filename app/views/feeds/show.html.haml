@@ -1,5 +1,6 @@
 .card
-  .card-header
+  .card-header.bg-primary
+    .float-end= button_to "Push", push_feed_path(@feed), class: 'btn btn-sm btn-danger', data: { turbo: false }
     %h3.card-title Feed
   .list-group.list-group-flush
     .list-group-item
