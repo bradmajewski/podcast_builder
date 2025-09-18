@@ -2,7 +2,7 @@ class PodcastsController < ApplicationController
   layout 'card', only: %i[new create edit update]
   before_action :find_podcast, only: %i[ show edit update destroy ]
   def index
-    @podcasts = Podcast.all
+    @podcasts = Podcast.with_feeds_and_episodes_count
   end
 
   def show

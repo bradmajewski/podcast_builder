@@ -9,5 +9,15 @@ class Podcast < ApplicationRecord
 
   validates :cover_art, processable_file: true, allow_nil: true
 
+  scope :with_feeds_and_episodes_count, -> {
+    left_outer_joins(:feeds, :episodes)
+      .select(
+        'podcasts.*',
+        'COUNT(feeds.id) AS feeds_count',
+        'COUNT(episodes.id) AS episodes_count'
+      )
+      .group('podcasts.id')
+  }
+
   def published? = published_at.present?
 end

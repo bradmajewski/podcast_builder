@@ -5,13 +5,18 @@
     %thead
       %tr
         %th Title
+        %th Episodes
         %th Owner
         %th Published
         %th Actions
     %tbody
       - @podcasts.each do |podcast|
         %tr
-          %td= link_to podcast.title, podcast_path(podcast)
+          %td
+            = link_to podcast.title, podcast_path(podcast)
+            - if podcast.feeds_count > 0
+              = bi('rss')
+          %td= podcast.episodes_count
           %td= podcast.owner&.name_for_ui || '–'
           %td= dt(podcast.published_at) || '–'
           %td.table-actions
