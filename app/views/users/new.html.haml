@@ -1,6 +1,7 @@
 - content_for :title, t("user.register")
 = simple_form_for @user do |f|
   .card-body
+    = f.input :name, required: false
     = f.input :email, required: true
     = f.input :password, required: true
     = f.input :password_confirmation, required: true

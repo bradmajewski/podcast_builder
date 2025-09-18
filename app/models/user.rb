@@ -20,7 +20,7 @@ class User < ApplicationRecord
   end
 
   def name_for_ui
-    email
+    name.presence || email
   end
 
   private

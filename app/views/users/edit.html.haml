@@ -1,6 +1,7 @@
 - content_for :title, "Edit User"
 = simple_form_for @user do |f|
   .card-body
+    = f.input :name
     = f.input :email, required: true
     = f.input :password, optional: true
     = f.input :password_confirmation, optional: true

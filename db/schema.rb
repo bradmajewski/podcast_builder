@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_16_192325) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_18_205318) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -45,15 +45,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_16_192325) do
     t.string "title", default: "", null: false
     t.text "description", default: "", null: false
     t.json "metadata", default: {}, null: false
-    t.datetime "published_at"
-    t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "published_at", precision: nil
+    t.datetime "deleted_at", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "duration", default: 0, null: false
     t.integer "bitrate", default: 0, null: false
-    t.index ["owner_id"], name: "index_episodes_on_owner_id"
-    t.index ["podcast_id"], name: "index_episodes_on_podcast_id"
-    t.check_constraint "json_type(metadata) = 'object'", name: "chk_metadata_is_object"
   end
 
   create_table "feeds", force: :cascade do |t|
@@ -111,6 +108,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_16_192325) do
     t.datetime "verified_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
