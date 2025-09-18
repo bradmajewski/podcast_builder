@@ -13,7 +13,8 @@ module SFTP
       checksums = metadata["episodes"] || {}
       feed.episodes.each do |episode|
         file = episode.audio_file
-        if checksums[episode.id] != file.checksum
+        checksum_mismatch = checksums[episode.id] != file.checksum
+        if checksum_mismatch
           checksums[episode.id] = file.checksum
 
           upload_episode(episode)
@@ -50,6 +51,14 @@ module SFTP
       File.join(feed.path, file)
     end
 
+    def episode_local_path(episode)
+      ActiveStorage::Blob.service.path_for(episode.audio_file.key)
+    end
+
+    def episode_remote_path(episode)
+      File.join(feed.path, "#{episode.id}.#{episode.audio_file.filename.extension}")
+    end
+
     def setup_folder
       client.find_or_create_path(path(""))
     end
@@ -59,12 +68,14 @@ module SFTP
     end
 
     def upload_episode(episode)
-      path = ActiveStorage::Blob.service.path_for(episode.audio_file.key)
-      filename = "#{episode.id}.#{episode.audio_file.filename.extension}"
-      client.session.upload!(path, filename)
+      client.session.upload!(episode_local_path(episode), episode_remote_path(episode))
     end
 
     private
+
+    def file_missing?(file)
+      client.file_type(path(file)) == 'not_found'
+    end
 
     def read_metadata
       if (json = read_file(path("metadata.json")))

@@ -76,7 +76,7 @@ module SFTP
     # Returns file type as a string. May also return 'not_found' or
     # 'permission_denied'.
     operation def file_type(path)
-      TYPES.fetch(session.stat!(path).type) do |type|
+      TYPES.fetch(stat_file(path).type) do |type|
         raise Error.new("Undocumented type: #{type}", @log)
       end
     rescue Error.catch(FX_NO_SUCH_FILE)
@@ -87,6 +87,10 @@ module SFTP
 
     def upload(local, remote)
       client.upload!(local, remote)
+    end
+
+    def stat_file(path)
+      session.stat!(path)
     end
 
     operation def read_file(path)
