@@ -14,7 +14,7 @@
           %td= link_to podcast.title, podcast_path(podcast)
           %td= podcast.owner&.name_for_ui || '–'
           %td= dt(podcast.published_at) || '–'
-          %td
-            = link_to 'Edit', edit_podcast_path(podcast, return_to: request.fullpath), class: "btn btn-sm btn-secondary"
-            = link_to 'Delete', podcast_path(podcast), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: "btn btn-sm btn-danger"
+          %td.table-actions
+            = link_to bi_edit, edit_podcast_path(podcast, return_to: request.fullpath), class: "btn btn-sm btn-secondary"
+            = link_to bi_delete, podcast_path(podcast), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: "btn btn-sm btn-danger", title: 'Delete'
   = link_to 'New Podcast', new_podcast_path, class: "btn btn-primary mt-3"

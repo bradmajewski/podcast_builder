@@ -4,6 +4,9 @@ module ApplicationHelper
     tag.i(**kwargs)
   end
 
+  def bi_edit(text=nil) = bi('pencil-square', title: text)
+  def bi_delete(text=nil) = bi('trash-fill', title: text)
+
   def dt(datetime, format: :system)
     datetime&.strftime(I18n.t("time.formats.#{format}"))
   end

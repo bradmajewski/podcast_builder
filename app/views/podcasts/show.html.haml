@@ -1,6 +1,6 @@
 .card
   .card-header.bg-primary
-    .float-end= link_to 'Edit Podcast', edit_podcast_path(@podcast, return_to: request.fullpath), class: 'btn btn-sm btn-secondary'
+    .float-end= link_to bi_edit, edit_podcast_path(@podcast, return_to: request.fullpath), class: 'btn btn-sm btn-secondary'
     - if @podcast.cover_art.attached?
       .float-start.me-3= image_tag @podcast.cover_art, height: 50
     %h3.card-title Podcast: #{@podcast.title}
@@ -23,7 +23,7 @@
               - @podcast.feeds.each do |feed|
                 %li
                   = link_to feed.url, feed
-                  = link_to 'edit', edit_feed_path(feed, return_to: request.fullpath), class: 'badge-link badge-primary ms-2'
+                  = link_to bi_edit, edit_feed_path(feed, return_to: request.fullpath), class: 'badge-link badge-primary ms-2'
           - else
             = link_to 'Add Feed', new_feed_path(podcast_id: @podcast.id, return_to: request.fullpath), class: 'btn btn-primary btn-sm'
   .card-footer
@@ -49,18 +49,11 @@
           %td= episode.title
           %td
             = episode.audio_file.filename
+            = link_to bi('download'), rails_blob_path(episode.audio_file, disposition: "attachment"), class: 'badge'
           %td.text-end= episode.duration&.to_clock
           %td #{episode.bitrate} kbps
           %td= dt(episode.published_at, format: :date) || "–"
           %td.table-actions
-            = link_to 'Play', podcast_episode_path(@podcast, episode), class: 'badge-link bg-info', target: '_blank', rel: 'noopener'
-            = link_to 'Download', rails_blob_path(episode.audio_file, disposition: "attachment"), class: 'badge-link bg-warning ms-2'
-            = link_to 'Edit', edit_podcast_episode_path(@podcast, episode), class: 'badge-link bg-secondary ms-2'
-            = link_to 'Delete', podcast_episode_path(@podcast, episode), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: 'badge-link bg-danger ms-2'
-
-.card.mt-5
-  .card-header.text-bg-dark
-    %h2 Debug
-  %pre= @podcast.attributes.to_yaml
-  - @podcast.episodes.each do |episode|
-    %pre= episode.attributes.to_yaml
+            = link_to bi('play-fill'), podcast_episode_path(@podcast, episode), class: 'badge-link bg-info', target: '_blank', rel: 'noopener'
+            = link_to bi_edit, edit_podcast_episode_path(@podcast, episode), class: 'badge-link bg-secondary ms-2'
+            = link_to bi_delete, podcast_episode_path(@podcast, episode), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: 'badge-link bg-danger ms-2'

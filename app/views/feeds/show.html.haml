@@ -21,7 +21,7 @@
         %th Updated At:
         %td= dt @feed.updated_at, format: :long
   .card-footer.card-buttons
-    = link_to 'Edit', edit_feed_path(@feed, return_to: request.fullpath), class: 'btn btn-sm btn-secondary'
-    = link_to 'RSS', rss_feed_path(@feed), class: 'btn btn-sm btn-info ms-4'
-    = link_to 'HTML', preview_html_feed_path(@feed), class: 'btn btn-sm btn-info ms-4'
+    = link_to bi_edit, edit_feed_path(@feed, return_to: request.fullpath), class: 'btn btn-sm btn-secondary'
+    = link_to raw("#{bi('rss-fill')} RSS"), rss_feed_path(@feed), class: 'btn btn-sm btn-info ms-4'
+    = link_to raw("#{bi('code')} HTML"), preview_html_feed_path(@feed), class: 'btn btn-sm btn-info ms-4'
     = link_to 'Back to Feeds', feeds_path, class: 'ms-auto'
