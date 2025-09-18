@@ -1,4 +1,9 @@
 module ApplicationHelper
+  def bi(icon_name, **kwargs)
+    kwargs[:class] = "bi bi-#{icon_name} #{kwargs[:class]}"
+    tag.i(**kwargs)
+  end
+
   def dt(datetime, format: :system)
     datetime&.strftime(I18n.t("time.formats.#{format}"))
   end
